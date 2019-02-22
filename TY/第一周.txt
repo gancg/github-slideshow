@@ -20,4 +20,32 @@
 -Xoss 本地方法栈 -Xss 栈容量
 -MaxPermSize -PermSize 方法区大小
 
-permGen space 对JDK1.6，可能是方法区大小分配问题；对JDK1.7 也有可能是类加载过多、jsp加载过多（jsp初始化时需要编译成java类）    
+permGen space 对JDK1.6，可能是方法区大小分配问题；对JDK1.7 也有可能是类加载过多、jsp加载过多（jsp初始化时需要编译成java类）
+
+
+在JDK1.7及过往版本中，java类信息、常量池、静态变量都放在perm（永久代）里。类的元数据和静态变量在类加载的时候分配到 Perm，当类被卸载的时候垃圾收集器从 Perm 处理掉类的元数据和静态变量。
+当然常量池的东西也会在 Perm 垃圾收集的时候进行处理。
+而在jdk1.8后，会将元数据放在本地内存中，将常量池和静态变量放到堆内存里。HotSopt VM 将会为类的元数据明确分配和释放本地内存。
+
+如果服务器内存足够，升级到 JDK 1.8 修改 JVM 参数最简单的办法就是将 -XX:PermSize 和 -XX:MaxPermSize 参数替换为 -XX:MetaspaceSize 和 -XX:MaxMetaspaceSize
+
+　 	   
+
+
+
+jps 虚拟机进程状态工具
+jps -l 输出主类的全名，如果运行的是jar包，则输出jar包的路径
+jps -v 输出虚拟机进程启动时的JVM参数 
+
+常用的图形化工具有：jconsole.exe  jvisualvm.exe(位于JDK的bin目录下) 
+
+
+NGLIX 负载均衡！
+
+1.sql语句
+2.多线程开发
+3.docker nglix
+
+
+
+160页  3.6.2
