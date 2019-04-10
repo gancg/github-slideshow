@@ -1,0 +1,8 @@
+修改duty-service.yml配置文件
+
+init:
+  ftpEnabled: false
+  updateToRedisDutyTimes: 0 30 2 * * ? 
+  
+ 更新三大服务 人员出入展示查询详情条件修改为身份证查询
+ case-deucate     houser-service    gateaway

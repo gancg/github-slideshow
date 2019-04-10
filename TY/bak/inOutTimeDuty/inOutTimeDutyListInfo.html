@@ -1,0 +1,78 @@
+<div class="on-map-panel hidden" id="onMapPanel">
+	<div class="layui-header">
+		<ul class="layui-nav" style="border-width: medium">
+			<li class="layui-nav-item chooseDay" style="width:13%" id="monday"><a style="font-size: 25px;cursor: pointer;width: 100px" ng-click="chooseDay(1)" class="weekOneDay">周一</a><div style="float: left;margin-left: 95px;margin-top:-60px;width: 100px"><button class="layui-btn layui-btn-xs layui-btn-normal  copy2 hidden" ng-click="chooseCopyDay2(1)">复制</button><button class="layui-btn layui-btn-xs hidden paste2" style="background-color: chartreuse" ng-click="pasteCopyDay2(1)">粘贴</button></div></li>
+			<li class="layui-nav-item chooseDay" style="width:13%"><a style="font-size: 25px;cursor: pointer;width: 100px" ng-click="chooseDay(2)" class="weekOneDay">周二</a><div style="float: left;margin-left: 95px;margin-top:-60px;width: 100px"><button class="layui-btn layui-btn-xs layui-btn-normal  copy2 hidden" ng-click="chooseCopyDay2(2)">复制</button><button class="layui-btn layui-btn-xs hidden paste2" style="background-color: chartreuse" ng-click="pasteCopyDay2(2)">粘贴</button></div></li>
+			<li class="layui-nav-item chooseDay" style="width:13%"><a style="font-size: 25px;cursor: pointer;width: 100px" ng-click="chooseDay(3)" class="weekOneDay">周三</a><div style="float: left;margin-left: 95px;margin-top:-60px;width: 100px"><button class="layui-btn layui-btn-xs layui-btn-normal  copy2 hidden" ng-click="chooseCopyDay2(3)">复制</button><button class="layui-btn layui-btn-xs hidden paste2" style="background-color: chartreuse" ng-click="pasteCopyDay2(3)">粘贴</button></div></li>
+			<li class="layui-nav-item chooseDay" style="width:13%"><a style="font-size: 25px;cursor: pointer;width: 100px" ng-click="chooseDay(4)" class="weekOneDay">周四</a><div style="float: left;margin-left: 95px;margin-top:-60px;width: 100px"><button class="layui-btn layui-btn-xs layui-btn-normal  copy2 hidden" ng-click="chooseCopyDay2(4)">复制</button><button class="layui-btn layui-btn-xs hidden paste2" style="background-color: chartreuse" ng-click="pasteCopyDay2(4)">粘贴</button></div></li>
+			<li class="layui-nav-item chooseDay" style="width:13%"><a style="font-size: 25px;cursor: pointer;width: 100px" ng-click="chooseDay(5)" class="weekOneDay">周五</a><div style="float: left;margin-left: 95px;margin-top:-60px;width: 100px"><button class="layui-btn layui-btn-xs layui-btn-normal  copy2 hidden" ng-click="chooseCopyDay2(5)">复制</button><button class="layui-btn layui-btn-xs hidden paste2" style="background-color: chartreuse" ng-click="pasteCopyDay2(5)">粘贴</button></div></li>
+			<li class="layui-nav-item chooseDay" style="width:13%"><a style="font-size: 25px;cursor: pointer;width: 100px" ng-click="chooseDay(6)" class="weekOneDay">周六</a><div style="float: left;margin-left: 95px;margin-top:-60px;width: 100px"><button class="layui-btn layui-btn-xs layui-btn-normal  copy2 hidden" ng-click="chooseCopyDay2(6)">复制</button><button class="layui-btn layui-btn-xs hidden paste2" style="background-color: chartreuse" ng-click="pasteCopyDay2(6)">粘贴</button></div></li>
+			<li class="layui-nav-item chooseDay" style="width:13%"><a style="font-size: 25px;cursor: pointer;width: 100px" ng-click="chooseDay(7)" class="weekOneDay">周日</a><div style="float: left;margin-left: 95px;margin-top:-60px;width: 100px"><button class="layui-btn layui-btn-xs layui-btn-normal  copy2 hidden" ng-click="chooseCopyDay2(7)">复制</button><button class="layui-btn layui-btn-xs hidden paste2" style="background-color: chartreuse" ng-click="pasteCopyDay2(7)">粘贴</button></div></li>
+		</ul>
+	</div>
+	<div id="DoorTimeSet" style="width: 740px;height: 500px;border:1px solid;position: absolute;margin-top: 20px;margin-left: 50px;overflow-y: auto">
+			<label style="margin-top: 30px;margin-left: 30px;position: inherit;font-size: 16px;font-weight: bold">大门<span style="color:red">进口</span>时间设置:</label>
+		<div class="layui-input-block" style="margin-top: 60px;margin-left: 30px;position: inherit;font-size: 14px;font-weight: bold;">
+				<ul id="inTimeSetDiv">
+				</ul>
+		</div>
+			<label style="margin-top: 30px;margin-left: 400px;position: inherit;font-size: 16px;font-weight: bold">大门<span style="color:red">出口</span>时间设置:</label>
+		<div class="layui-input-block" style="margin-top: 60px;margin-left: 400px;position: inherit;font-size: 14px;font-weight: bold;">
+			<ul id="outTimeSetDiv">
+				<!--<li style="margin-top: 10px">
+					<input  type="text" class="layui-input outTimeDutyBeginClass timeDutyClass" style="width:120px"  placeholder="开始时间"  />
+					<span>到</span>
+					<input  type="text" class="layui-input outTimeDutyEndClass timeDutyClass" style="width:120px"  placeholder="结束时间" />
+					<span class="layui-input-inline">
+						<i class="duty-class-add-inout" onclick="angular.element(this).scope().outTimeClassesAdd()" ></i>
+						<i class="duty-class-del-inout" onclick="angular.element(this).scope().inTimeClassesDel(this)" ng-show="canDel"></i>
+					</span>
+				</li>-->
+			</ul>
+		</div>
+		<div class="layui-form-item" style="width:300px;height:50px;position: absolute;margin-left: 200px;margin-top: 420px">
+			<div class="layui-input-block">
+				<span class="layui-btn" ng-click="submitInOutTimeSetForDoor()">保存</span>
+			</div>
+		</div>
+	</div>
+	<div id="DormitoryTimeSet" style="width: 740px;height: 500px;border:1px solid;float: left;margin-left: 850px;margin-top:20px;position: absolute;overflow-y: auto">
+		<label style="margin-top: 30px;margin-left: 30px;position: inherit;font-size: 16px;font-weight: bold">宿舍<span style="color:red">进口</span>时间设置:</label>
+		<div class="layui-input-block" style="margin-top: 60px;margin-left: 30px;position: inherit;font-size: 14px;font-weight: bold;">
+			<ul id="DormitoryInTimeSetDiv">
+				<li style="margin-top: 10px">
+					<input  type="text" class="layui-input DormitoryInTimeDutyBeginClass timeDutyClass" style="width:120px"  placeholder="开始时间"  />
+					<span>到</span>
+					<input  type="text" class="layui-input DormitoryInTimeDutyEndClass timeDutyClass" style="width:120px"  placeholder="结束时间" />
+					<span class="layui-input-inline">
+						<i class="duty-class-add-inout" onclick="angular.element(this).scope().DormitoryInTimeClassesAdd()" ></i>
+						<i class="duty-class-del-inout" onclick="angular.element(this).scope().inTimeClassesDel(this)" ng-show="canDel"></i>
+					</span>
+				</li>
+			</ul>
+		</div>
+		<label style="margin-top: 30px;margin-left: 400px;position: inherit;font-size: 16px;font-weight: bold">宿舍<span style="color:red">出口</span>时间设置:</label>
+		<div class="layui-input-block" style="margin-top: 60px;margin-left: 400px;position: inherit;font-size: 14px;font-weight: bold;">
+			<ul id="DormitoryOutTimeSetDiv">
+				<li style="margin-top: 10px">
+					<input  type="text" class="layui-input DormitoryOutTimeDutyBeginClass timeDutyClass" style="width:120px"  placeholder="开始时间"  />
+					<span>到</span>
+						<input  type="text" class="layui-input DormitoryOutTimeDutyEndClass timeDutyClass" style="width:120px"  placeholder="结束时间" />
+					<span class="layui-input-inline">
+						<i class="duty-class-add-inout" onclick="angular.element(this).scope().DormitoryOutTimeClassesAdd()" ></i>
+						<i class="duty-class-del-inout" onclick="angular.element(this).scope().inTimeClassesDel(this)" ng-show="canDel"></i>
+					</span>
+				</li>
+			</ul>
+		</div>
+		<div class="layui-form-item" style="width:300px;height:50px;position: absolute;margin-left: 200px;margin-top: 420px">
+			<div class="layui-input-block">
+				<span class="layui-btn" ng-click="submitInOutTimeSetForDormitory()">保存</span>
+			</div>
+		</div>
+	</div>
+	<div class="table-page">
+		<div id="pageDemo"></div>
+	</div>
+	<div class="cl"></div>
+</div>

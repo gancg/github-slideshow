@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tianyi.event.mapper.InOutTimeDutyMapper">
+  <resultMap id="BaseResultTemplateMap" type="com.tianyi.event.model.InOutTimeDutyTemplate" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="ORGAN_ID" property="organId" jdbcType="INTEGER" />
+    <result column="PEOPLE_TYPE" property="peopleType" jdbcType="TINYINT" />
+    <result column="WEEK_DAY" property="weekDay" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="BaseResultRelateMap" type="com.tianyi.event.model.InOutTimeDutyRelate" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="template_id" property="templateId" jdbcType="INTEGER" />
+    <result column="inOut_flag" property="inoutFlag" jdbcType="BIT" />
+    <result column="device_flag" property="deviceFlag" jdbcType="BIT" />
+    <result column="duty_begin_time" property="dutyBeginTime" jdbcType="VARCHAR" />
+    <result column="duty_end_time" property="dutyEndTime" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="BIGINT" />
+  </resultMap>
+  <select id="queryInOutTemplateByMap" parameterType="map" resultMap="BaseResultTemplateMap">
+    select
+    ID, ORGAN_ID, PEOPLE_TYPE, WEEK_DAY
+    from t_inout_timeduty_template
+    where ORGAN_ID = #{organId,jdbcType=INTEGER}
+    <if test="peopleType != null">
+      AND PEOPLE_TYPE = #{peopleType,jdbcType=TINYINT}
+    </if>
+    <if test="weekDay != null">
+      AND WEEK_DAY = #{weekDay,jdbcType=TINYINT}
+    </if>
+    order by id
+  </select>
+  <select id="queryOrganType" parameterType="java.lang.Integer" resultType="int">
+    select type_id from t_organ where id=#{organId,jdbcType=INTEGER}
+  </select>
+  <select id="queryTemplateById" parameterType="java.lang.Integer" resultMap="BaseResultTemplateMap">
+    select
+    ID, ORGAN_ID, PEOPLE_TYPE, WEEK_DAY
+    from t_inout_timeduty_template
+    where id=#{templateId,jdbcType=INTEGER}
+  </select>
+  <select id="queryInOutRelateByTemplateId" parameterType="java.lang.Integer" resultMap="BaseResultRelateMap">
+    select
+        id, template_id, inOut_flag,device_flag, duty_begin_time, duty_end_time, UPDATE_TIME, UPDATE_USER_ID
+    from t_inout_timeduty_relate
+    where template_id = #{template_id,jdbcType=INTEGER}
+    order by id
+  </select>
+  <select id="queryInOutRelateByTemplateIdAndFlag" parameterType="map" resultMap="BaseResultRelateMap">
+    select
+        id, template_id, inOut_flag, duty_begin_time, duty_end_time, UPDATE_TIME, UPDATE_USER_ID
+    from t_inout_timeduty_relate
+    where template_id = #{templateId,jdbcType=INTEGER}
+    and inOut_flag=#{flag,jdbcType=BIT}
+    order by id
+  </select>
+  <delete id="deleteByTemplageMap" parameterType="map" >
+    delete from t_inout_timeduty_relate
+    where template_id = #{templateId,jdbcType=INTEGER}
+    <if test="deviceFlag != null">
+      and device_flag=#{deviceFlag,jdbcType=BIT}
+    </if>
+  </delete>
+  <insert id="batchInsertRelate" parameterType="java.util.List">
+    insert into t_inout_timeduty_relate
+    (
+    template_id, inOut_flag, duty_begin_time, duty_end_time, UPDATE_TIME, UPDATE_USER_ID,device_flag
+    )
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (
+      #{item.templateId,jdbcType=INTEGER}, #{item.inoutFlag,jdbcType=BIT}, #{item.dutyBeginTime,jdbcType=VARCHAR},
+      #{item.dutyEndTime,jdbcType=VARCHAR},sysdate(), #{item.updateUserId,jdbcType=BIGINT},#{item.deviceFlag,jdbcType=BIT}
+      )
+    </foreach>
+  </insert>
+  <insert id="batchInsertTemplate" parameterType="java.util.List">
+    insert into t_inout_timeduty_template
+    (
+    ORGAN_ID, PEOPLE_TYPE, WEEK_DAY
+    )
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (
+      #{item.organId,jdbcType=INTEGER},#{item.peopleType,jdbcType=TINYINT}, #{item.weekDay,jdbcType=TINYINT}
+      )
+    </foreach>
+  </insert>
+</mapper>

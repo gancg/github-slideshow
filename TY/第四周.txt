@@ -1,5 +1,7 @@
 http://25.30.9.77:8060/house/swagger-ui.html
 
+总裁助理：郭姐
+
 http://127.0.0.1:8060/house/swagger-ui.html
 
 
@@ -10,4 +12,4 @@ organId  templeType  wenkNum  dutyType  startTime standTime endTime
 ID   duty_type(0,1,2)  weekDay
 
 --时间考勤表  t_time_duty
-ID  机构 duty_type(0,1,2) week_day(0~6)  time_type（0,1,2） startTime standTime endTime
+ID  机构 duty_type(0,1,2) week_day(0~6)  time_type（0,1,2） startTime standTime endTime 
