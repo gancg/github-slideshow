@@ -1,4 +1,5 @@
 <!--1.模板  页面结构-->
+
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
@@ -100,6 +101,7 @@ export default {
 <style scoped>
 h1, h2 {
   font-weight: normal;
+  font-size: 12px;
 }
 ul {
   list-style-type: none;
